@@ -1,0 +1,16 @@
+name: navicitadel-minio
+
+services:
+  s3:
+    container_name: navicitadel-s3
+    command: server /data --console-address ":9001"
+    env_file: minio.env
+    image: docker.io/pgsty/minio:${MINIO_VERSION:-latest-amd64}
+    ports:
+      - 127.0.0.1:9000:9000
+      - 127.0.0.1:9001:9001
+    volumes:
+      - navicitadel-minio-data:/data
+
+volumes:
+  navicitadel-minio-data:
